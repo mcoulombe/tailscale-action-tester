@@ -1,0 +1,27 @@
+name: Manual Tailscale Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch or commit SHA to test'
+        required: true
+        default: 'main'
+
+jobs:
+  test-tailscale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the specified ref
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.ref }}
+
+      - name: Authenticate with Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
+      - name: Show current Tailscale status
+        run: tailscale status
