@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Authenticate with Tailscale
-        uses: tailscale/github-action@7e6046c1f4838fcabc959d130a72d70faec525a0
+        uses: tailscale/github-action@8cee476ec30af8fd5ba663ed048a6a44915b1d0b
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
 
