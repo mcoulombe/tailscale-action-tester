@@ -12,6 +12,7 @@ jobs:
         uses: tailscale/github-action@db73f02ac22287d13b404a427c710761aa577537
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          retry: 1
 
       - name: Show current Tailscale status
         run: tailscale status
