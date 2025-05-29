@@ -2,6 +2,10 @@ name: Manual Tailscale Test
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: "Tag, branch, or commit hash of the action to use"
+        default: "main"
 
 jobs:
   test-tailscale:
@@ -9,7 +13,7 @@ jobs:
 
     steps:
       - name: Authenticate with Tailscale
-        uses: tailscale/github-action@v3
+        uses: tailscale/github-action@{{ github.event.inputs.ref }}
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           hostname: github-actions-monitoring
