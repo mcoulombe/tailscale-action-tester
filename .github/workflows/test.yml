@@ -9,10 +9,11 @@ jobs:
 
     steps:
       - name: Authenticate with Tailscale
-        uses: tailscale/github-action@029c99af76d53fa362a1168429bcb3aff9793c45
+        uses: tailscale/github-action@v3
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-          retry: 3
+          hostname: github-actions-monitoring
+          ephemeral: true
 
       - name: Show current Tailscale status
         run: tailscale status
