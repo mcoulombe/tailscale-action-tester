@@ -2,18 +2,20 @@ name: Manual Tailscale Test
 
 on:
   workflow_dispatch:
-    inputs:
-      ref:
-        description: "Tag, branch, or commit hash of the action to use"
-        default: "main"
 
 jobs:
-  test-tailscale:
+  test-tailscale-github-action:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version:
+          - 'v2'
+          - 'v3'
+          - 'main'
 
     steps:
-      - name: Authenticate with Tailscale
-        uses: tailscale/github-action@{{ github.event.inputs.ref }}
+      - name: test tailscale github action version ${{ matrix.version }}
+        uses: tailscale/github-action@${{ matrix.version }}
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           hostname: github-actions-monitoring
