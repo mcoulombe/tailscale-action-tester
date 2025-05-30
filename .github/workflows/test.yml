@@ -9,13 +9,12 @@ jobs:
     strategy:
       matrix:
         version:
-          - 'v2'
           - 'v3'
           - 'main'
 
     steps:
       - name: test tailscale github action version ${{ matrix.version }}
-        uses: tailscale/github-action@v3
+        uses: tailscale/github-action@${{ matrix.version }}
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           hostname: github-actions-monitoring
